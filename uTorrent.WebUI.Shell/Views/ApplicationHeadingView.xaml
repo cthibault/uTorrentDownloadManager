@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="uTorrent.WebUI.Shell.Views.ApplicationHeadingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d">
+    <Grid>
+        <TextBlock Grid.Row="0" Text="D" FontSize="42"  />
+        <TextBlock Grid.Row="0" Text="ownload" FontSize="22" Margin="23,3,0,0" />
+        <TextBlock Grid.Row="0" Text="M" FontSize="42" Margin="20,13,0,0" />
+        <TextBlock Grid.Row="0" Text="anager" FontSize="22" Margin="52,18,0,0"  />
+    </Grid>
+</UserControl>

@@ -1,0 +1,41 @@
+### COMPILED SOURCE ###
+*.com
+*.class
+*.dll
+*.exe
+*.pdb
+*.dll.config
+*.cache
+*.suo
+*.vsp
+*.exe.config
+### NUGET PACKAGES ###
+# Include dlls if they’re in the NuGet packages directory
+!/packages/*/lib/*.dll
+/packages/*
+### VS UPGRADE STUFF ###
+UpgradeLog.XML
+_UpgradeReport_Files/
+### DIRECTORIES ###
+[Bb]in/
+[Oo]bj/
+TestResults/
+### WEB PUBLISH LOG ###
+*.Publish.xml
+### RESHARPER ###
+/_ReSharper.*
+*.ReSharper.*
+### PACKAGES ###
+# it’s better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+### LOGS AND DATABASES ###
+*.log
+*.sqlite
