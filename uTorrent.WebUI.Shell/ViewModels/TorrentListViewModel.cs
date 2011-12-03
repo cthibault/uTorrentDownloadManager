@@ -127,7 +127,7 @@ namespace uTorrent.WebUI.Shell.ViewModels
         private void LoadModel()
         {
             this.StatusMessages = new ObservableCollection<string>();
-            this.Torrents = this._repository.GetAll().ToObservable();
+            this.RefreshTorrentsFromRepository();
             this.RaisePropertyChanged(() => this.SortedTorrents);
         }
 
@@ -138,6 +138,11 @@ namespace uTorrent.WebUI.Shell.ViewModels
             this.SettingsModel.LogFile = directory + "error.log";
             this.SettingsModel.VerboseLogging = true;
             this.SettingsModel.SetConnectionInfo(ConnectionInfoUtility.GetConnectionInfo());
+        }
+
+        private void RefreshTorrentsFromRepository()
+        {
+            this.Torrents = this._repository.GetRecent().ToObservable();
         }
 
         #endregion Initialization Methods
@@ -213,9 +218,6 @@ namespace uTorrent.WebUI.Shell.ViewModels
                 if (completedResult.Value != null)
                 {
                     var nonDuplicateTorrents = completedResult.Value.Where(torrent => !this.Torrents.Contains(torrent)).ToList();
-                    foreach (var torrent in nonDuplicateTorrents)
-                        this.Torrents.Add(torrent);
-
                     this._repository.Add(nonDuplicateTorrents);
                 }
             }
@@ -225,6 +227,8 @@ namespace uTorrent.WebUI.Shell.ViewModels
                 completedResult.DisplayMessages.Add(this.TimestampStatusMessage(message));
                 _eventLog.WriteToLog(completedResult);
             }
+
+            this.RefreshTorrentsFromRepository();
 
             this.UpdateStatusMessage(message);
             this.RaisePropertyChanged(() => this.SortedTorrents);

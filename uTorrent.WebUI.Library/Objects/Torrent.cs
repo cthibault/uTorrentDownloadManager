@@ -10,6 +10,7 @@ namespace uTorrent.WebUI.Library.Objects
         #region Private Fields
 
         private readonly string _hash = string.Empty;
+        private readonly TimeSpan _recent = new TimeSpan(1, 0, 0, 0);
 
         #endregion Private Fields
 
@@ -36,6 +37,13 @@ namespace uTorrent.WebUI.Library.Objects
             get
             {
                 return this.Remaining == 0 && PercentProgress == 1000;
+            }
+        }
+        public bool IsRecentDownload
+        {
+            get
+            {
+                return this.TimeCompleted.HasValue && DateTime.Now - this.TimeCompleted.Value < _recent;
             }
         }
 

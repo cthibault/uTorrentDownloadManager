@@ -9,6 +9,8 @@ namespace uTorrent.WebUI.Shell.Data
     interface ITorrentRepository
     {
         IEnumerable<Torrent> GetAll();
+        IEnumerable<Torrent> GetRecent();
+
         bool Add(Torrent torrent);
         bool Add(IEnumerable<Torrent> torrents);
 

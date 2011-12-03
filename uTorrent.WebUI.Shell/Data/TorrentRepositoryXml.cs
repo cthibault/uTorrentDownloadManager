@@ -12,6 +12,7 @@ namespace uTorrent.WebUI.Shell.Data
     public class TorrentRepositoryXml : ITorrentRepository
     {
         private readonly string _filepath = string.Empty;
+        private readonly TimeSpan _recent = new TimeSpan(7, 0, 0, 0);
 
         private static class TorrentRepoElements
         {
@@ -60,6 +61,13 @@ namespace uTorrent.WebUI.Shell.Data
             
             return torrents;
         }
+
+        public IEnumerable<Torrent> GetRecent()
+        {
+            var torrents = this.GetAll().Reverse();
+            return torrents.TakeWhile(t => !t.TimeCompleted.HasValue || DateTime.Now - t.TimeCompleted.Value < _recent);
+        }
+
 
         public bool Add(Torrent torrent)
         {
