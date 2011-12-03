@@ -11,24 +11,32 @@ namespace uTorrent.WebUI.Library.Objects
     {
         public static IEnumerable<Torrent> GetTorrents(string input)
         {
-            var jobject = JObject.Parse(input);
-            var ts = jobject["torrents"].Children();
-
             List<Torrent> torrents = new List<Torrent>();
-            ts.ToList().ForEach(t => torrents.Add(new Torrent(t.ElementAt(TorrentPropertyJsonIndex.HASH).ToString())
+
+            if (!string.IsNullOrEmpty(input))
+            {
+                var jobject = JObject.Parse(input);
+                var ts = jobject["torrents"].Children();
+
+                ts.ToList().ForEach(t => torrents.Add(new Torrent(t.ElementAt(TorrentPropertyJsonIndex.HASH).ToString())
                                                       {
                                                           Name = t.ElementAt(TorrentPropertyJsonIndex.NAME).ToString(),
-                                                          Status = (int)t.ElementAt(TorrentPropertyJsonIndex.STATUS),
-                                                          Size = (int)t.ElementAt(TorrentPropertyJsonIndex.SIZE),
-                                                          PercentProgress = (int)t.ElementAt(TorrentPropertyJsonIndex.PERCENT_PROGRESS),
-                                                          Downloaded = (int)t.ElementAt(TorrentPropertyJsonIndex.DOWNLOADED),
-                                                          DownloadSpeed = (int)t.ElementAt(TorrentPropertyJsonIndex.DOWNLOAD_SPEED),
-                                                          ETA = (int)t.ElementAt(TorrentPropertyJsonIndex.ETA),
+                                                          Status = (int) t.ElementAt(TorrentPropertyJsonIndex.STATUS),
+                                                          Size = (int) t.ElementAt(TorrentPropertyJsonIndex.SIZE),
+                                                          PercentProgress =
+                                                              (int)
+                                                              t.ElementAt(TorrentPropertyJsonIndex.PERCENT_PROGRESS),
+                                                          Downloaded =
+                                                              (int) t.ElementAt(TorrentPropertyJsonIndex.DOWNLOADED),
+                                                          DownloadSpeed =
+                                                              (int) t.ElementAt(TorrentPropertyJsonIndex.DOWNLOAD_SPEED),
+                                                          ETA = (int) t.ElementAt(TorrentPropertyJsonIndex.ETA),
                                                           Label = t.ElementAt(TorrentPropertyJsonIndex.ETA).ToString(),
-                                                          Remaining = (int)t.ElementAt(TorrentPropertyJsonIndex.REMAINING)
+                                                          Remaining =
+                                                              (int) t.ElementAt(TorrentPropertyJsonIndex.REMAINING)
                                                       })
-                                );
-
+                    );
+            }
             return torrents;
         }
     }

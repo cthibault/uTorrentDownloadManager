@@ -29,6 +29,8 @@ namespace uTorrent.WebUI.Library.Objects
         public string Label { get; set; }
         public int Remaining { get; set; }
 
+        public DateTime? TimeCompleted { get; set; }
+
         public bool DownloadCompleted
         {
             get
@@ -48,26 +50,29 @@ namespace uTorrent.WebUI.Library.Objects
 
         #endregion Constructors
 
-        #region Protected Override Methods
+        #region Equality
 
-        public override string ToString()
+        public bool Equals(Torrent other)
         {
-            StringBuilder builder = new StringBuilder();
-            builder.AppendLine(string.Format(this.Name));
-            builder.AppendLine(string.Format("  Label: {0}", this.Label));
-            builder.AppendLine(string.Format("  Hash: {0}", this.Hash));
-            builder.AppendLine(string.Format("  Status: {0}", this.Status));
-            builder.AppendLine(string.Format("  Size: {0}", this.Size));
-            builder.AppendLine(string.Format("  Percent Progress: {0}", this.PercentProgress));
-            builder.AppendLine(string.Format("  Downloaded: {0}", this.Downloaded));
-            builder.AppendLine(string.Format("  Remaining: {0}", this.Remaining));
-            builder.AppendLine(string.Format("  Download Speed: {0}", this.DownloadSpeed));
-            builder.Append(string.Format("  ETA: {0}", this.ETA));
-
-            return builder.ToString();
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return Equals(other._hash, this._hash);
         }
 
-        #endregion Protected Override Methods
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != typeof(Torrent)) return false;
+            return Equals((Torrent)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return (_hash != null ? _hash.GetHashCode() : 0);
+        }
+
+        #endregion Equality
     }
 }
 /*

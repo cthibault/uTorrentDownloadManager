@@ -15,7 +15,8 @@ namespace uTorrent.WebUI.Library.Objects
         private readonly string _password = string.Empty;
         private readonly string _hostAddress = string.Empty;
         private readonly string _portAddress = string.Empty;
-        private ICredentials _credentials;
+        private readonly TimeSpan _timeout;
+        private ICredentials _credentials = null;
 
         #endregion Private Fields
 
@@ -33,7 +34,7 @@ namespace uTorrent.WebUI.Library.Objects
 
         #endregion Private Properties
 
-        #region Public Properties
+        #region IWebUIConnectionInfo
 
         public ICredentials Credentials
         {
@@ -50,16 +51,22 @@ namespace uTorrent.WebUI.Library.Objects
             get { return this._portAddress; }
         }
 
-        #endregion Public Properties
+        public TimeSpan Timeout
+        {
+            get { return this._timeout; }
+        }
+
+        #endregion IWebUIConnectionInfo
 
         #region Constructors
 
-        public WebUIConnectionInfo()
+        public WebUIConnectionInfo(string username, string password, string hostAddress, string portAddress)
         {
-            this._username = "client";
-            this._password = "client";
-            this._hostAddress = "192.168.1.119";
-            this._portAddress = "27214";
+            this._username = username;
+            this._password = password;
+            this._hostAddress = hostAddress;
+            this._portAddress = portAddress;
+            this._timeout = new TimeSpan(0, 0, 15, 0);
         }
 
         #endregion Constructors

@@ -8,5 +8,6 @@ namespace uTorrent.WebUI.Library.Objects.Interfaces
         ICredentials Credentials { get; }
         string HostAddress { get; }
         string PortAddress { get; }
+        TimeSpan Timeout { get; }
     }
 }

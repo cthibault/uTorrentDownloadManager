@@ -1,0 +1,57 @@
+﻿<Window x:Class="uTorrent.WebUI.Shell.Views.SettingsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SettingsView" Height="300" Width="300">
+    
+    <StackPanel>
+        <GroupBox Header="Poll Frequency">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+        
+                <Label Grid.Row="0" Grid.Column="0" Content="Hours" HorizontalAlignment="Right" />
+                <Label Grid.Row="0" Grid.Column="1" Content="{Binding Model.PollingHours, Mode=OneWay}" Width="30" HorizontalAlignment="Center" />
+                <Slider Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" Value="{Binding Model.PollingHours, Mode=TwoWay}" Minimum="{Binding HoursMinValue}" Maximum="{Binding HoursMaxValue}" />
+        
+                <Label Grid.Row="1" Grid.Column="0" Content="Minutes" HorizontalAlignment="Right" />
+                <Label Grid.Row="1" Grid.Column="1" Content="{Binding Model.PollingMinutes, Mode=OneWay}" Width="30" HorizontalAlignment="Center" />
+                <Slider Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Value="{Binding Model.PollingMinutes}" Minimum="{Binding MinutesMinValue}" Maximum="{Binding MinutesMaxValue}" />
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Connection Information">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Content="Username" HorizontalAlignment="Right" />
+                <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Model.Username, Mode=TwoWay}" Margin="0,2" />
+
+                <Label Grid.Row="1" Grid.Column="0" Content="Password" HorizontalAlignment="Right" />
+                <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding Model.Password, Mode=TwoWay}" Margin="0,2" />
+
+                <Label Grid.Row="2" Grid.Column="0" Content="IP Address" HorizontalAlignment="Right" />
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Model.HostAddress, Mode=TwoWay}" Margin="0,2" />
+
+                <Label Grid.Row="2" Grid.Column="2" Content="Port" HorizontalAlignment="Right" />
+                <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding Model.Port, Mode=TwoWay}" Margin="0,2" />
+            </Grid>
+        </GroupBox>
+    </StackPanel>
+</Window>

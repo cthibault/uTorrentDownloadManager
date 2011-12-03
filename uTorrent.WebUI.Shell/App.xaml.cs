@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Windows;
+﻿using System.Windows;
+using Microsoft.Practices.Unity;
+using uTorrent.WebUI.Shell.ViewModels.Interfaces;
+using Microsoft.Practices.Unity.Configuration;
 
 namespace uTorrent.WebUI.Shell
 {
@@ -12,5 +10,15 @@ namespace uTorrent.WebUI.Shell
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            IUnityContainer container = new UnityContainer();
+            container.LoadConfiguration();
+
+            var mainWindowVM = container.Resolve<IMainWindowViewModel>();
+            this.MainWindow = mainWindowVM.View as Window;
+        }
     }
 }
