@@ -25,7 +25,7 @@ namespace uTorrent.WebUI.Library.Objects
             get
             {
                 if (this._connectionInfo == null)
-                    this._connectionInfo = ConnectionInfoUtility.GetConnectionInfo();
+                    this._connectionInfo = ConnectionInfoUtility.ConnectionInfo;
 
                 return this._connectionInfo;
             }

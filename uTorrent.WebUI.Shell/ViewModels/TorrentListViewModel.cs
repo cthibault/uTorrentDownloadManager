@@ -133,11 +133,10 @@ namespace uTorrent.WebUI.Shell.ViewModels
 
         private void LoadSettingsModel()
         {
-            string directory = @"C:\DownloadManager\";
-            this.SettingsModel.RepositoryFile = directory + "repo.xml";
-            this.SettingsModel.LogFile = directory + "error.log";
-            this.SettingsModel.VerboseLogging = true;
-            this.SettingsModel.SetConnectionInfo(ConnectionInfoUtility.GetConnectionInfo());
+            this.SettingsModel.RepositoryFile = ConnectionInfoUtility.RepositoryLocation;
+            this.SettingsModel.LogFile = ConnectionInfoUtility.LogLocation;
+            this.SettingsModel.VerboseLogging = ConnectionInfoUtility.VerboseLogging;
+            this.SettingsModel.SetConnectionInfo(ConnectionInfoUtility.ConnectionInfo);
         }
 
         private void RefreshTorrentsFromRepository()
