@@ -22,13 +22,13 @@ namespace uTorrent.WebUI.Library.Objects
         }
         public string Name { get; set; }
         public int Status { get; set; }
-        public int Size { get; set; }
+        public double Size { get; set; }
         public int PercentProgress { get; set; }
-        public int Downloaded { get; set; }
+        public double Downloaded { get; set; }
         public int DownloadSpeed { get; set; }
         public int ETA { get; set; }
         public string Label { get; set; }
-        public int Remaining { get; set; }
+        public double Remaining { get; set; }
 
         public DateTime? TimeCompleted { get; set; }
 
@@ -36,7 +36,7 @@ namespace uTorrent.WebUI.Library.Objects
         {
             get
             {
-                return this.Remaining == 0 && PercentProgress == 1000;
+                return PercentProgress == 1000 && this.Remaining < 1;
             }
         }
         public bool IsRecentDownload

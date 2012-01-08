@@ -9,7 +9,7 @@
   <UserControl.Resources>
     <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
     <DataTemplate x:Key="TorrentTemplate">
-      <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis">
+      <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" FontSize="18">
         <TextBlock.Style>
           <Style>
             <Style.Triggers>

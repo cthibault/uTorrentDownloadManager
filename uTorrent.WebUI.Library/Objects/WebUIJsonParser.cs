@@ -11,32 +11,30 @@ namespace uTorrent.WebUI.Library.Objects
     {
         public static IEnumerable<Torrent> GetTorrents(string input)
         {
-            List<Torrent> torrents = new List<Torrent>();
+            var torrents = new List<Torrent>();
 
             if (!string.IsNullOrEmpty(input))
             {
                 var jobject = JObject.Parse(input);
                 var ts = jobject["torrents"].Children();
 
-                ts.ToList().ForEach(t => torrents.Add(new Torrent(t.ElementAt(TorrentPropertyJsonIndex.HASH).ToString())
-                                                      {
-                                                          Name = t.ElementAt(TorrentPropertyJsonIndex.NAME).ToString(),
-                                                          Status = (int) t.ElementAt(TorrentPropertyJsonIndex.STATUS),
-                                                          Size = (int) t.ElementAt(TorrentPropertyJsonIndex.SIZE),
-                                                          PercentProgress =
-                                                              (int)
-                                                              t.ElementAt(TorrentPropertyJsonIndex.PERCENT_PROGRESS),
-                                                          Downloaded =
-                                                              (int) t.ElementAt(TorrentPropertyJsonIndex.DOWNLOADED),
-                                                          DownloadSpeed =
-                                                              (int) t.ElementAt(TorrentPropertyJsonIndex.DOWNLOAD_SPEED),
-                                                          ETA = (int) t.ElementAt(TorrentPropertyJsonIndex.ETA),
-                                                          Label = t.ElementAt(TorrentPropertyJsonIndex.ETA).ToString(),
-                                                          Remaining =
-                                                              (int) t.ElementAt(TorrentPropertyJsonIndex.REMAINING)
-                                                      })
-                    );
+                foreach (var torrent in ts)
+                {
+                    torrents.Add(new Torrent(torrent.ElementAt(TorrentPropertyJsonIndex.HASH).ToString())
+                                 {
+                                     Name = torrent.ElementAt(TorrentPropertyJsonIndex.NAME).ToString(),
+                                     Status = (int) torrent.ElementAt(TorrentPropertyJsonIndex.STATUS),
+                                     Size = (double) torrent.ElementAt(TorrentPropertyJsonIndex.SIZE),
+                                     PercentProgress = (int) torrent.ElementAt(TorrentPropertyJsonIndex.PERCENT_PROGRESS),
+                                     Downloaded = (double) torrent.ElementAt(TorrentPropertyJsonIndex.DOWNLOADED),
+                                     DownloadSpeed = (int) torrent.ElementAt(TorrentPropertyJsonIndex.DOWNLOAD_SPEED),
+                                     ETA = (int) torrent.ElementAt(TorrentPropertyJsonIndex.ETA),
+                                     Label = torrent.ElementAt(TorrentPropertyJsonIndex.ETA).ToString(),
+                                     Remaining = (double) torrent.ElementAt(TorrentPropertyJsonIndex.REMAINING)
+                                 });
+                }
             }
+
             return torrents;
         }
     }
